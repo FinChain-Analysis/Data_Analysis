@@ -1,0 +1,206 @@
+table DATA
+	lineageTag: 9ad1d353-58b6-4bb3-be87-a8b312b14e4a
+
+	measure test
+		lineageTag: 6adf13b3-4ef3-4c74-a3e9-aa1b65c1b92f
+
+	column 'Source.Name'
+		dataType: string
+		lineageTag: a031dfaa-ff27-482f-9302-768608915396
+		summarizeBy: none
+		sourceColumn: Source.Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column timestamp
+		dataType: string
+		lineageTag: 0b464c5e-4a7d-46bd-987d-385d24e21a20
+		summarizeBy: none
+		sourceColumn: timestamp
+
+		annotation SummarizationSetBy = Automatic
+
+	column operation_hash
+		dataType: string
+		lineageTag: c73b0d39-2a3b-42bc-98ce-cce5cb0e69d4
+		summarizeBy: none
+		sourceColumn: operation_hash
+
+		annotation SummarizationSetBy = Automatic
+
+	column operation_group_index
+		dataType: int64
+		formatString: 0
+		lineageTag: 3dca81be-1b62-4039-b5ed-21b2cd48b20d
+		summarizeBy: sum
+		sourceColumn: operation_group_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column content_index
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d79234f-6b3b-498f-b49e-8a28725bc694
+		summarizeBy: sum
+		sourceColumn: content_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column internal_operation_index
+		dataType: int64
+		formatString: 0
+		lineageTag: a56ecbf6-a0d8-4033-b117-0840f1e2b15a
+		summarizeBy: sum
+		sourceColumn: internal_operation_index
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: 63ed669f-3fe7-4abe-9d33-4716489aa80b
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column destination
+		dataType: string
+		lineageTag: fa0844e7-f629-4161-a6e6-5558257207b0
+		summarizeBy: none
+		sourceColumn: destination
+
+		annotation SummarizationSetBy = Automatic
+
+	column fee
+		dataType: int64
+		formatString: 0
+		lineageTag: fd006cc7-f002-4c3d-9415-70c2a91161e4
+		summarizeBy: sum
+		sourceColumn: fee
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount
+		dataType: int64
+		formatString: 0
+		lineageTag: a3b22c0e-57e6-498b-8ca3-fc5d20af3fdd
+		summarizeBy: sum
+		sourceColumn: amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column counter
+		dataType: int64
+		formatString: 0
+		lineageTag: 41849c8c-fe7c-4be7-82a6-bfce49a6eb10
+		summarizeBy: sum
+		sourceColumn: counter
+
+		annotation SummarizationSetBy = Automatic
+
+	column gas_limit
+		dataType: int64
+		formatString: 0
+		lineageTag: 46474c4a-7c7f-4252-86bc-b616e70e51be
+		summarizeBy: sum
+		sourceColumn: gas_limit
+
+		annotation SummarizationSetBy = Automatic
+
+	column storage_limit
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fcc9e44-a5c4-4bee-a40b-598e5d2a38dd
+		summarizeBy: sum
+		sourceColumn: storage_limit
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 1fdc8bc0-00c5-4b58-a261-f8608d1473d5
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column consumed_gas
+		dataType: int64
+		formatString: 0
+		lineageTag: 77d6ae81-dcfe-4822-8547-c7853ab48d17
+		summarizeBy: sum
+		sourceColumn: consumed_gas
+
+		annotation SummarizationSetBy = Automatic
+
+	column storage_size
+		dataType: int64
+		formatString: 0
+		lineageTag: b701fa00-18dc-463c-a7bb-97bb9ad299f3
+		summarizeBy: sum
+		sourceColumn: storage_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column contract_type
+		dataType: string
+		lineageTag: 433d18b0-9a42-4f46-aa41-d1886760d79e
+		summarizeBy: none
+		sourceColumn: contract_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column protocole_name
+		dataType: string
+		lineageTag: 7cd9995e-d31c-4feb-a199-a2fde995936c
+		summarizeBy: none
+		sourceColumn: protocole_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column operation_type
+		dataType: string
+		lineageTag: 1a791462-a494-478d-9124-d059911a79c7
+		summarizeBy: none
+		sourceColumn: operation_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2917f282-adb2-457e-be7d-fb6015ffd47e
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: ddb1c186-7880-4874-b86a-a157d4dd1a14
+			defaultHierarchy: LocalDateTable_63983ab5-3451-4ec4-a6f0-39958c1d6eb6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition DATA = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("C:\Users\hhamm\Documents\FHAMM\hackhaton tezos\data\DATA"),
+				    #"Filtered Hidden Files1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+				    #"Invoke Custom Function1" = Table.AddColumn(#"Filtered Hidden Files1", "Transform File", each #"Transform File"([Content])),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
+				    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File"}),
+				    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File", Table.ColumnNames(#"Transform File"(#"Sample File"))),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"level", Int64.Type}, {"timestamp", type text}, {"block_hash", type text}, {"branch", type text}, {"signature", type text}, {"operation_hash", type text}, {"operation_group_index", Int64.Type}, {"operation_index", Int64.Type}, {"content_index", Int64.Type}, {"internal_operation_index", Int64.Type}, {"source", type text}, {"destination", type text}, {"fee", type any}, {"amount", Int64.Type}, {"counter", type any}, {"gas_limit", type any}, {"storage_limit", type any}, {"status", type text}, {"consumed_gas", Int64.Type}, {"storage_size", Int64.Type}, {"parameters", type text}, {"contract_type", type text}, {"protocole_name", type text}, {"operation_type", type text}}),
+				    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Changed Type", "Date", each Text.BeforeDelimiter([timestamp], " ", 1), type text),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Inserted Text Before Delimiter",{{"Date", type datetime}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Changed Type1",{{"Date", type date}, {"fee", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type2",{"block_hash", "branch", "signature", "operation_index", "parameters", "level"}),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Removed Columns",{{"gas_limit", Int64.Type}, {"counter", Int64.Type}, {"storage_limit", Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type3", each true)
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+
