@@ -8,3 +8,8 @@ relationship ddb1c186-7880-4874-b86a-a157d4dd1a14
 	fromColumn: DATA.Date
 	toColumn: LocalDateTable_63983ab5-3451-4ec4-a6f0-39958c1d6eb6.Date
 
+relationship 82c3372d-d7d4-48ce-b49a-4c6a2269177b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Feuil4.Date
+	toColumn: LocalDateTable_74abab6d-d05b-4680-9b69-c96bf92bb956.Date
+

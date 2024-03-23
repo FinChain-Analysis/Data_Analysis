@@ -1,0 +1,44 @@
+table Feuil4
+	lineageTag: 456dfb7b-48e8-4006-a405-8b1c5649dd4d
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 16b69e68-71ce-4cc8-89fe-eaa93c652068
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 82c3372d-d7d4-48ce-b49a-4c6a2269177b
+			defaultHierarchy: LocalDateTable_74abab6d-d05b-4680-9b69-c96bf92bb956.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CA
+		dataType: double
+		lineageTag: 1dbd07bb-6dc5-4efd-be8f-89939a531feb
+		summarizeBy: sum
+		sourceColumn: CA
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Feuil4 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\hhamm\Documents\FHAMM\hackhaton tezos\data\Classeur1.xlsx"), null, true),
+				    Feuil4_Sheet = Source{[Item="Feuil4",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Feuil4_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"CA", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

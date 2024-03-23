@@ -14,7 +14,7 @@ queryGroup 'Transform File from DATA\Helper Queries'
 
 	annotation PBI_QueryGroupOrder = 0
 
-annotation PBI_QueryOrder = ["date","DATA","Sample File","Parameter1","Transform Sample File","Transform File"]
+annotation PBI_QueryOrder = ["date","DATA","Sample File","Parameter1","Transform Sample File","Transform File","Feuil4"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -27,4 +27,6 @@ ref table DateTableTemplate_e82baca9-d007-4f17-813b-9cf3aaa09929
 ref table LocalDateTable_a0d256d2-b620-4fd2-8052-588ed589e4ad
 ref table DATA
 ref table LocalDateTable_63983ab5-3451-4ec4-a6f0-39958c1d6eb6
+ref table Feuil4
+ref table LocalDateTable_74abab6d-d05b-4680-9b69-c96bf92bb956
 

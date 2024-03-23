@@ -192,7 +192,7 @@ table DATA
 				    #"Renamed Columns1" = Table.RenameColumns(#"Invoke Custom Function1", {"Name", "Source.Name"}),
 				    #"Removed Other Columns1" = Table.SelectColumns(#"Renamed Columns1", {"Source.Name", "Transform File"}),
 				    #"Expanded Table Column1" = Table.ExpandTableColumn(#"Removed Other Columns1", "Transform File", Table.ColumnNames(#"Transform File"(#"Sample File"))),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"level", Int64.Type}, {"timestamp", type text}, {"block_hash", type text}, {"branch", type text}, {"signature", type text}, {"operation_hash", type text}, {"operation_group_index", Int64.Type}, {"operation_index", Int64.Type}, {"content_index", Int64.Type}, {"internal_operation_index", Int64.Type}, {"source", type text}, {"destination", type text}, {"fee", type any}, {"amount", Int64.Type}, {"counter", type any}, {"gas_limit", type any}, {"storage_limit", type any}, {"status", type text}, {"consumed_gas", Int64.Type}, {"storage_size", Int64.Type}, {"parameters", type text}, {"contract_type", type text}, {"protocole_name", type text}, {"operation_type", type text}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Expanded Table Column1",{{"Source.Name", type text}, {"timestamp", type text}, {"block_hash", type text}, {"branch", type text}, {"signature", type text}, {"operation_hash", type text}, {"operation_group_index", Int64.Type}, {"operation_index", Int64.Type}, {"content_index", Int64.Type}, {"internal_operation_index", Int64.Type}, {"source", type text}, {"destination", type text}, {"fee", type any}, {"amount", Int64.Type}, {"counter", type any}, {"gas_limit", type any}, {"storage_limit", type any}, {"status", type text}, {"consumed_gas", Int64.Type}, {"storage_size", Int64.Type}, {"parameters", type text}, {"contract_type", type text}, {"protocole_name", type text}, {"operation_type", type text}}),
 				    #"Inserted Text Before Delimiter" = Table.AddColumn(#"Changed Type", "Date", each Text.BeforeDelimiter([timestamp], " ", 1), type text),
 				    #"Changed Type1" = Table.TransformColumnTypes(#"Inserted Text Before Delimiter",{{"Date", type datetime}}),
 				    #"Changed Type2" = Table.TransformColumnTypes(#"Changed Type1",{{"Date", type date}, {"fee", Int64.Type}}),
@@ -203,4 +203,6 @@ table DATA
 				    #"Filtered Rows"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
